@@ -2,6 +2,12 @@ import tkinter as tk
 
 xTurn = True
 btns = [0,0,0,0,0,0,0,0,0]
+"""
+positions in the btns array on the game.
+0 1 2
+3 4 5
+6 7 8
+"""
 
 def btnEnter(event):
     if (btns[btnPos(event)]==0):
@@ -22,12 +28,16 @@ def btnClick(event):
         else:
             btns[btnPos(event)] = 2
         xTurn = not xTurn
+    print (btns)
 
 def btnPos(event):
     row = event.widget.grid_info()['row']
     col = event.widget.grid_info()['column']
     index = (row*3)+col
-    return index 
+    return index
+
+def checkWin():
+    if btns[0]
 
 window = tk.Tk()
 window.title('Tic Tac Toe')
