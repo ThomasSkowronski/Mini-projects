@@ -1,10 +1,9 @@
-PING google.com (142.250.176.206) 56(84) bytes of data.
-64 bytes from lga34s37-in-f14.1e100.net (142.250.176.206): icmp_seq=1 ttl=118 time=17.1 ms
-64 bytes from lga34s37-in-f14.1e100.net (142.250.176.206): icmp_seq=2 ttl=118 time=18.2 ms
-64 bytes from lga34s37-in-f14.1e100.net (142.250.176.206): icmp_seq=3 ttl=118 time=15.5 ms
-64 bytes from lga34s37-in-f14.1e100.net (142.250.176.206): icmp_seq=4 ttl=118 time=17.4 ms
-64 bytes from lga34s37-in-f14.1e100.net (142.250.176.206): icmp_seq=5 ttl=118 time=10.4 ms
 
---- google.com ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 4006ms
-rtt min/avg/max/mdev = 10.364/15.691/18.162/2.806 ms
+Pinging google.com [142.250.65.174] with 32 bytes of data:
+Reply from 142.250.65.174: bytes=32 time=171ms TTL=117
+Reply from 142.250.65.174: bytes=32 time=11ms TTL=117
+
+Ping statistics for 142.250.65.174:
+    Packets: Sent = 2, Received = 2, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 11ms, Maximum = 171ms, Average = 91ms

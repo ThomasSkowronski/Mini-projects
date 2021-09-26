@@ -35,7 +35,7 @@ def strReverse():
     app()
 
 def pingGoogle():
-    os.system('ping google.com -c 5 > log.txt')
+    os.system('ping google.com > log.txt')
     app()
 
 app()
