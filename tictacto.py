@@ -28,6 +28,7 @@ def btnClick(event):
         else:
             btns[btnPos(event)] = 2
         xTurn = not xTurn
+    checkWin()
     print (btns)
 
 def btnPos(event):
@@ -37,7 +38,46 @@ def btnPos(event):
     return index
 
 def checkWin():
-    if btns[0]
+    row1 = btns[0]*btns[1]*btns[2]
+    row2 = btns[3]*btns[4]*btns[5]
+    row3 = btns[6]*btns[7]*btns[8]
+
+    col1 = btns[0]*btns[3]*btns[6]
+    col2 = btns[1]*btns[4]*btns[7]
+    col3 = btns[2]*btns[5]*btns[8]
+
+    dia1= btns[0]*btns[4]*btns[8]
+    dia2 = btns[2]*btns[4]*btns[6]
+
+    if 1 in {row1,row2,row3,col1,col2,col3,dia1,dia2}:
+        print('X wins')
+        resetGame()
+    elif 8 in {row1,row2,row3,col1,col2,col3,dia1,dia2}:
+        print('O wins')
+        resetGame()
+
+def resetGame():
+    for k in range(9):
+        btns[k] = 0
+    global xTurn
+    xTurn = True
+
+    global gameFrame
+    gameFrame.destroy()
+
+    gameFrame = tk.Frame(window, background='white')
+    gameFrame.grid(row=1, column=0, sticky='nesw')
+
+    for i in range(3):
+        gameFrame.columnconfigure(i, weight=1, minsize=50)
+        gameFrame.rowconfigure(i, weight=1, minsize=50)
+        for j in range(3):
+            button = tk.Button(gameFrame, relief=tk.RAISED)
+            button.grid(row=i, column=j, sticky='nesw')
+            button.bind("<Enter>", btnEnter)
+            button.bind("<Leave>", btnLeave)
+            button.bind("<Button-1>", btnClick)
+
 
 window = tk.Tk()
 window.title('Tic Tac Toe')
