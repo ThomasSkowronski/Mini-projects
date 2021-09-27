@@ -1,6 +1,7 @@
 import tkinter as tk
 
 xTurn = True
+gameOn = True
 btns = [0,0,0,0,0,0,0,0,0]
 """
 positions in the btns array on the game.
@@ -21,15 +22,20 @@ def btnLeave(event):
         event.widget.configure(text='')
 
 def btnClick(event):
-    if (btns[btnPos(event)]==0):
-        global xTurn
-        if (xTurn):
-            btns[btnPos(event)] = 1
-        else:
-            btns[btnPos(event)] = 2
-        xTurn = not xTurn
-    checkWin()
-    print (btns)
+    global label
+
+    if gameOn:
+        if (btns[btnPos(event)]==0):
+            global xTurn
+            if (xTurn):
+                btns[btnPos(event)] = 1
+                label['text']='O Turn'
+            else:
+                btns[btnPos(event)] = 2
+                label['text']='X Turn'
+            xTurn = not xTurn
+            checkWin()
+            print (btns)
 
 def btnPos(event):
     row = event.widget.grid_info()['row']
@@ -38,6 +44,8 @@ def btnPos(event):
     return index
 
 def checkWin():
+    global gameOn
+
     row1 = btns[0]*btns[1]*btns[2]
     row2 = btns[3]*btns[4]*btns[5]
     row3 = btns[6]*btns[7]*btns[8]
@@ -51,12 +59,19 @@ def checkWin():
 
     if 1 in {row1,row2,row3,col1,col2,col3,dia1,dia2}:
         print('X wins')
-        resetGame()
+        label['text']='X Wins'
+        gameOn = False
     elif 8 in {row1,row2,row3,col1,col2,col3,dia1,dia2}:
         print('O wins')
-        resetGame()
+        label['text']='O Wins'
+        gameOn = False
 
 def resetGame():
+    label['text']='X Turn'
+
+    global gameOn
+    gameOn = True
+
     for k in range(9):
         btns[k] = 0
     global xTurn
@@ -78,6 +93,9 @@ def resetGame():
             button.bind("<Leave>", btnLeave)
             button.bind("<Button-1>", btnClick)
 
+def resetGameBtn(event):
+    resetGame()
+
 
 window = tk.Tk()
 window.title('Tic Tac Toe')
@@ -88,11 +106,16 @@ window.rowconfigure(1, weight=1, minsize=300)
 
 controlFrame = tk.Frame(window, background='white')
 controlFrame.columnconfigure(0, weight=1, minsize=80)
+controlFrame.columnconfigure(1, weight=1, minsize=80)
 controlFrame.rowconfigure(0, weight=1, minsize=80)
 controlFrame.grid(row=0, column=0, sticky='new')
 
-label = tk.Label(controlFrame, text='label', relief=tk.RAISED)
+label = tk.Label(controlFrame, text='X Turn', relief=tk.RAISED)
 label.grid(row=0, column=0, sticky='nesw')
+
+gameButton = tk.Button(controlFrame, text='New Game', relief=tk.RAISED)
+gameButton.grid(row=0, column=1, sticky='nesw')
+gameButton.bind("<Button-1>", resetGameBtn)
 
 gameFrame = tk.Frame(window, background='white')
 gameFrame.grid(row=1, column=0, sticky='nesw')
