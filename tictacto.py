@@ -61,13 +61,21 @@ def checkWin():
         print('X wins')
         label['text']='X Wins'
         gameOn = False
+        gameButton["text"] = "New Game"
     elif 8 in {row1,row2,row3,col1,col2,col3,dia1,dia2}:
         print('O wins')
         label['text']='O Wins'
         gameOn = False
+        gameButton["text"] = "New Game"
+    elif 0 not in btns:
+        print('Tie Game!')
+        label['text']="Tie Game!"
+        gameOn=False
+        gameButton["text"] = "New Game"
 
 def resetGame():
     label['text']='X Turn'
+    gameButton["text"] = "Reset Game"
 
     global gameOn
     gameOn = True
@@ -113,7 +121,7 @@ controlFrame.grid(row=0, column=0, sticky='new')
 label = tk.Label(controlFrame, text='X Turn', relief=tk.RAISED)
 label.grid(row=0, column=0, sticky='nesw')
 
-gameButton = tk.Button(controlFrame, text='New Game', relief=tk.RAISED)
+gameButton = tk.Button(controlFrame, text='Reset Game', relief=tk.RAISED)
 gameButton.grid(row=0, column=1, sticky='nesw')
 gameButton.bind("<Button-1>", resetGameBtn)
 
