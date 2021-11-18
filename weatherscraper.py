@@ -1,3 +1,9 @@
+'''
+Basic web scraper that grabs weather
+data from noaa.gov and displays inf
+in the command line
+'''
+
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import re
